@@ -1,0 +1,51 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.main {
+  padding: 20px 0;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .main-table {
+      border: 3px solid black;
+      padding: 20px;
+
+      .main-table-head {
+        border: 1px solid black;
+
+        tr {
+          display: grid;
+          grid-template-columns: repeat(4, 200px);
+
+          .main-table-head-item {
+            border: 1px solid black;
+            padding: 15px;
+            text-align: center;
+
+          }
+        }
+      }
+
+      .main-table-body {
+        border: 1px solid black;
+
+        tr {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+
+          .main-table-body-item {
+            border: 1px solid black;
+            padding: 15px;
+            text-align: center;
+          }
+        }
+
+
+      }
+    }
+  }
+}
