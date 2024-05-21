@@ -55,6 +55,13 @@ html, body {
   bottom: 0;
   background-color: #eaeaea;
 
+  .close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+  }
+
   .pan1-description {
     padding: 20px;
     display: flex;

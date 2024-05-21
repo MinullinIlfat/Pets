@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   isOpen: boolean = false;
   petName: string | null = null;
   petPhoto: string | null = null;
+  petStatus: string | null = null;
 
 
   constructor(private petsService: PetsService) {
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit {
               item.photoUrls = ''
             }
             this.arrayPets.push({id: item.id, name: item.name,
-              photoUrls: [item.photoUrls]})
+              photoUrls: [item.photoUrls], status: item.status})
           }
         })
       })
@@ -79,9 +80,14 @@ export class AppComponent implements OnInit {
     });
   }
 
-  open(petName:string, petPhoto: string) {
+  open(petName:string, petPhoto: string, petStatus: string) {
     this.isOpen = true;
     this.petName = petName;
     this.petPhoto = petPhoto;
+    this.petStatus = petStatus;
+  }
+
+  close() {
+    this.isOpen = false;
   }
 }
