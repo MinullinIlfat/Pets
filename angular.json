@@ -30,7 +30,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/code.jquery.com_jquery-3.7.0.min.js"
+            ]
           },
           "configurations": {
             "production": {
