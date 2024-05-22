@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PetsType} from "../../../types/pets.type";
-import {map, Observable, pipe} from "rxjs";
+import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 
 @Injectable({
@@ -14,6 +14,6 @@ export class PetsService {
   }
 
   getPets(): Observable<PetsType[]> {
-    return this.http.get<PetsType[]>(environment.api + '/pet/findByStatus?status=available')
+    return this.http.get<PetsType[]>(environment.api + '/pet/findByStatus?status=available,sold,pending')
   }
 }

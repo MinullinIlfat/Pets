@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PetsService} from "./shared/services/pets.service";
+
 declare var $: any;
 
 @Component({
@@ -9,34 +10,34 @@ declare var $: any;
 })
 export class AppComponent implements OnInit {
 
-  pets: any[] = []
-  arrayPets: any[] = []
-  isOpen: boolean = false;
+  pets: any[] = [];
+  arrayPets: any = [];
   petName: string | null = null;
   petPhoto: string | null = null;
   petStatus: string | null = null;
-
+  petCategory: string | null = null;
 
   constructor(private petsService: PetsService) {
 
   }
+
   ngOnInit() {
     this.petsService.getPets()
       .subscribe(data => {
-        this.pets = data
+        this.pets = data;
 
         this.pets.forEach(item => {
           if (item) {
-            if (item.photoUrls == "string") {
-              item.photoUrls = ''
-            }
-            this.arrayPets.push({id: item.id, name: item.name,
-              photoUrls: [item.photoUrls], status: item.status})
+            this.arrayPets.push({
+              id: item.id, name: item.name,
+              photoUrls: [item.photoUrls], status: item.status, category: item.category
+            });
           }
         })
       })
 
-    $(document).ready(function() {
+    //Модальное окно
+    $(document).ready(function () {
       var p = $(".pan1");
       var d = $(".pan2");
       var r = $("#resize");
@@ -44,35 +45,34 @@ export class AppComponent implements OnInit {
       var curr_width = p.width()
       var unlock = false;
 
-      $(document).mousemove(function(e:any) {
+      $(document).mousemove(function (e: any) {
         var change = curr_width + (e.clientX - curr_width);
 
-        if(unlock) {
-          if(change > 199) {
+        if (unlock) {
+          if (change > 199) {
             $("#debug").text(e.clientX + " resize");
             p.css("width", change);
             d.css("margin-left", change);
-          }
-          else {
+          } else {
             p.css("width", 200);
             d.css("margin-left", 200);
           }
         }
       });
 
-      r.mousedown(function(e:any) {
+      r.mousedown(function (e: any) {
         curr_width = p.width();
         unlock = true;
         r.css("background-color", "rgba(0, 0, 0, 0.2)");
       });
 
-      $(document).mousedown(function(e:any) {
-        if(unlock) {
+      $(document).mousedown(function (e: any) {
+        if (unlock) {
           e.preventDefault();
         }
       });
 
-      $(document).mouseup(function(e:any) {
+      $(document).mouseup(function (e: any) {
         unlock = false;
         $("#debug").text("");
         r.css("background-color", "rgba(0, 0, 0, 0.1)");
@@ -80,14 +80,23 @@ export class AppComponent implements OnInit {
     });
   }
 
-  open(petName:string, petPhoto: string, petStatus: string) {
-    this.isOpen = true;
+  //Открытие модального окна и передача данных
+  open(petName: string, petPhoto: string, petStatus: string, petCategory: string) {
+    let pan1 = document.getElementById('pan1');
+
+    if (pan1) {
+      pan1.style.display = 'block';
+    }
     this.petName = petName;
     this.petPhoto = petPhoto;
     this.petStatus = petStatus;
+    this.petCategory = petCategory;
   }
-
+  //Закрытие модального окна
   close() {
-    this.isOpen = false;
+    let pan1 = document.getElementById('pan1');
+    if (pan1) {
+      pan1.style.display = 'none';
+    }
   }
 }
