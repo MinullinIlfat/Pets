@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PetsType} from "../../../types/pets.type";
 import {Observable} from "rxjs";
@@ -10,7 +10,6 @@ import {environment} from "../../../environments/environment";
 export class PetsService {
 
   constructor(private http: HttpClient) {
-
   }
 
   getPets(): Observable<PetsType[]> {

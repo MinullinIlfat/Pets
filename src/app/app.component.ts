@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PetsService} from "./shared/services/pets.service";
+import {PetsType} from "../types/pets.type";
 
 declare var $: any;
 
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.petsService.getPets()
-      .subscribe(data => {
+      .subscribe((data: PetsType[]) => {
         this.pets = data;
 
         this.pets.forEach(item => {
@@ -82,7 +83,7 @@ export class AppComponent implements OnInit {
 
   //Открытие модального окна и передача данных
   open(petName: string, petPhoto: string, petStatus: string, petCategory: string) {
-    let pan1 = document.getElementById('pan1');
+    let pan1: HTMLElement | null = document.getElementById('pan1');
 
     if (pan1) {
       pan1.style.display = 'block';
@@ -92,9 +93,10 @@ export class AppComponent implements OnInit {
     this.petStatus = petStatus;
     this.petCategory = petCategory;
   }
+
   //Закрытие модального окна
   close() {
-    let pan1 = document.getElementById('pan1');
+    let pan1: HTMLElement | null = document.getElementById('pan1');
     if (pan1) {
       pan1.style.display = 'none';
     }
